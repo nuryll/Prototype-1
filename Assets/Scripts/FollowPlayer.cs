@@ -2,19 +2,16 @@ using UnityEngine;
 
 public class FollowPlayer : MonoBehaviour
 {
-    public GameObject player;
-    private Vector3 offset = new Vector3(0, 5, -7);
+    public Transform player;   // Reference to the player (car)
+    public Vector3 offset = new Vector3(0, 5, -12);  // Camera offset relative to car
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
     void LateUpdate()
     {
-        transform.position = player.transform.position + offset;
+        // Position camera relative to player's rotation
+        transform.position = player.position + player.rotation * offset;
 
+        // Make camera always look at the car
+        transform.LookAt(player);
     }
 }
+
